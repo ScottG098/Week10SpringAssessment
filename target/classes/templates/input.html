@@ -2,10 +2,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New House Listing</title>
+<script type="text/javascript">
+	function validate() {
+		if(document.houseForm.address.value == "") {
+			alert("Enter Address of Property");
+			return false;
+		}
+		if(document.houseForm.numOfBeds.value == '0') {
+			alert("Enter Number of Bedrooms for Property");
+			return false;
+		}
+		if(document.houseForm.numOfBaths.value == '0') {
+			alert("Enter Number of Bathrooms for Property");
+			return false;
+		}
+		if(document.houseForm.forSale.value == '') {
+			alert("Is Property currently avaliable: true/false");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
-<form th:object="${newHouse}" 
-th:action="@{/update/{id}(id=${newHouse.id})}" method=POST>
+<form name="houseForm" th:object="${newHouse}" 
+th:action="@{/update/{id}(id=${newHouse.id})}" method=POST onsubmit="return(validate());">
 
 Address: <input name="address" size="20" th:field="*{address}"> <br />
 Number of Bedrooms: <input name="numOfBeds" size="20" th:field="*{numOfBeds}"><br />
